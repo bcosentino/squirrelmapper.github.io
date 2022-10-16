@@ -13,12 +13,21 @@
 
 <title>SquirrelMapper</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
@@ -196,35 +205,19 @@
 </body>
 </html>
 
-
-
-
 <style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+
+
 
 <link rel="stylesheet" href="../styles.css" type="text/css" />
 
@@ -235,10 +228,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -255,40 +244,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -316,7 +278,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -328,7 +290,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -339,10 +301,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -354,7 +329,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -443,6 +417,9 @@ $(document).ready(function () {
   <a href="map.html">Squirrel Map</a>
 </li>
 <li>
+  <a href="squirrelspotter.html">Squirrel Spotter</a>
+</li>
+<li>
   <a href="faq.html">FAQ</a>
 </li>
 <li>
@@ -467,7 +444,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -482,23 +459,32 @@ $('.title').remove()
 <p><br></p>
 <div id="distributed-research-project-to-test-for-parallel-urban-to-rural-clines" class="section level2">
 <h2><strong>Distributed research project to test for parallel urban-to-rural clines</strong></h2>
-<div id="research-goal-we-will-collect-data-on-the-abundance-of-color-morphs-of-eastern-gray-squirrels-along-urbanization-gradients-to-test-for-parallel-urban-to-rural-clines-in-melanism.-melanism-in-eastern-gray-squirrels-is-a-simple-mendelian-trait.-our-previous-work-using-opportunistic-data-suggests-clines-in-melanism-are-common-but-that-theres-considerable-variation-in-the-prevalence-of-melanism-and-the-shape-of-urban-to-rural-clines-among-cities.-this-project-will-provide-greater-insight-into-how-city-characteristics-affect-the-degree-of-parallel-urban-evolution-using-standardized-surveys-for-squirrel-color-morphs." class="section level4">
-<h4><strong>Research goal:</strong> We will collect data on the abundance of color morphs of eastern gray squirrels along urbanization gradients to test for parallel urban-to-rural clines in melanism. Melanism in eastern gray squirrels is a simple Mendelian trait. Our previous work using opportunistic data suggests clines in melanism are common, but that there’s considerable variation in the prevalence of melanism and the shape of urban-to-rural clines among cities. This project will provide greater insight into how city characteristics affect the degree of parallel urban evolution using standardized surveys for squirrel color morphs.</h4>
+<div id="project-background-urban-areas-are-the-fastest-growing-ecosystem-on-earth.-ecological-conditions-vary-sharply-between-cities-and-rural-areas-and-cities-are-more-similar-to-each-other-in-many-respects-than-to-adjacent-rural-lands-e.g.-extensive-impervious-cover.-the-novel-conditions-found-in-cities-are-hypothesized-to-cause-parallel-evolution-of-trait-variation-but-tests-of-parallel-evolution-are-often-limited-by-the-logistical-constraints-of-conducting-studies-across-multiple-replicate-cities.-we-seek-to-form-a-network-of-collaborators-to-test-across-multiple-cities-in-north-america-whether-urbanization-causes-parallel-evolution-of-coat-color-in-eastern-gray-squirrels-sciurus-carolinensis.-gray-squirrels-commonly-have-two-coat-colors-gray-and-black-inherited-in-a-simple-mendelian-fashion-at-the-melanocortin-1-receptor-gene.-previous-work-suggests-differences-in-crypsis-between-color-morphs-in-urban-and-rural-environments-may-generate-clines-in-melanism-but-widespread-tests-for-urban-rural-clines-in-squirrel-melanism-have-been-limited-to-analyses-of-incidental-observations-of-squirrels-via-community-science-e.g.-inaturalist.-here-we-seek-your-collaboration-as-a-partner-to-test-for-urban-rural-clines-in-melanism-using-wildlife-cameras-as-a-standardized-sampling-approach.-the-protocol-is-designed-to-also-function-as-an-educational-activity-for-engaging-students-grades-9-12-and-undergraduates-in-field-surveys-of-mammal-populations." class="section level4">
+<h4><strong>Project background:</strong> Urban areas are the fastest growing ecosystem on Earth. Ecological conditions vary sharply between cities and rural areas, and cities are more similar to each other in many respects than to adjacent rural lands (e.g., extensive impervious cover). The novel conditions found in cities are hypothesized to cause parallel evolution of trait variation, but tests of parallel evolution are often limited by the logistical constraints of conducting studies across multiple, replicate cities. We seek to form a network of collaborators to test across multiple cities in North America whether urbanization causes parallel evolution of coat color in eastern gray squirrels (<i>Sciurus carolinensis</i>). Gray squirrels commonly have two coat colors – gray and black – inherited in a simple Mendelian fashion at the melanocortin-1 receptor gene. Previous work suggests differences in crypsis between color morphs in urban and rural environments may generate clines in melanism, but widespread tests for urban-rural clines in squirrel melanism have been limited to analyses of incidental observations of squirrels via community science (e.g., iNaturalist). Here we seek your collaboration as a partner to test for urban-rural clines in melanism using wildlife cameras as a standardized sampling approach. The protocol is designed to also function as an educational activity for engaging students (grades 9-12 and undergraduates) in field surveys of mammal populations.</h4>
 </div>
-<div id="basic-approach-camera-traps-will-be-used-to-document-the-occurrence-and-relative-abundance-of-each-morph-along-an-urbanization-gradient.-collaborators-will-establish-camera-traps-at-20-30-sites-along-at-least-one-urban-to-rural-transect-in-their-home-city.-camera-traps-will-be-left-in-place-for-up-to-3-weeks-and-then-removed." class="section level4">
-<h4><strong>Basic approach:</strong> Camera traps will be used to document the occurrence and relative abundance of each morph along an urbanization gradient. Collaborators will establish camera traps at 20-30 sites along at least one urban-to-rural transect in their home city. Camera traps will be left in place for up to 3 weeks and then removed.</h4>
+<div id="basic-approach-camera-traps-will-be-used-to-document-the-occurrence-and-relative-abundance-of-each-morph-along-an-urbanization-gradient.-collaborators-will-establish-camera-traps-at-20-30-sites-along-at-least-one-urban-to-rural-transect-in-their-home-city.-camera-traps-will-be-left-in-place-for-4-weeks-and-then-removed.-collaborators-will-also-conduct-a-short-visual-survey-for-squirrels-when-deploying-and-retrieving-camera-traps.-check-out-our-sampling-protocol-for-all-the-details." class="section level4">
+<h4><strong>Basic approach:</strong> Camera traps will be used to document the occurrence and relative abundance of each morph along an urbanization gradient. Collaborators will establish camera traps at 20-30 sites along at least one urban-to-rural transect in their home city. Camera traps will be left in place for 4 weeks and then removed. Collaborators will also conduct a short visual survey for squirrels when deploying and retrieving camera traps. <a href="https://docs.google.com/document/d/1mbDwk2ERQrSb3EqxGZqbwUgfi18dwqoO9w7LlnYSlfg/edit?usp=sharing">Check out our sampling protocol for all the details.</a></h4>
 </div>
-<div id="cost-for-labs-that-have-camera-traps-and-sd-cards-already-the-only-costs-are-batteries-for-the-cameras-and-gas-for-transportation.-if-you-would-like-to-participate-but-do-not-have-camera-traps-you-can-purchase-your-own-camera-trap-equipment.-camera-traps-sufficient-for-this-project-run-about-100-150each.-sd-cards-are-about-5-each-and-you-can-get-a-pack-of-batteries-to-run-up-to-30-cameras-for-about-50.-optional-equipment-includes-a-security-case-and-lock-for-each-camera.-we-may-have-a-limited-number-of-camera-traps-that-we-can-loan-out-for-a-three-week-sampling-timeframe-so-if-youd-like-to-participate-but-cannot-purcahse-your-own-equipment-please-still-feel-free-to-express-interest-in-the-project." class="section level4">
-<h4><strong>Cost:</strong> For labs that have camera traps and SD cards already, the only costs are batteries for the cameras and gas for transportation. If you would like to participate but do not have camera traps, you can purchase your own camera trap equipment. Camera traps sufficient for this project run about $100-150/each. SD cards are about $5 each, and you can get a pack of batteries to run up to 30 cameras for about $50. Optional equipment includes a security case and lock for each camera. We may have a limited number of camera traps that we can loan out for a three-week sampling timeframe, so if you’d like to participate but cannot purcahse your own equipment, please still feel free to express interest in the project.</h4>
+<div id="materials-and-cost-for-labs-that-have-camera-traps-and-sd-cards-already-the-only-costs-are-batteries-for-the-cameras-and-gas-for-transportation.-if-you-would-like-to-participate-but-do-not-have-camera-traps-you-can-purchase-your-own-camera-trap-equipment.-camera-traps-sufficient-for-this-project-run-about-100-150each.-sd-cards-are-about-5-each-and-you-can-get-a-pack-of-batteries-to-run-up-to-30-cameras-for-about-50.-optional-equipment-includes-a-security-case-and-lock-for-each-camera.-we-may-have-a-limited-number-of-camera-traps-that-we-can-loan-out-for-a-four-week-sampling-timeframe-so-if-youd-like-to-participate-but-cannot-purchase-your-own-equipment-please-still-feel-free-to-contact-us." class="section level4">
+<h4><strong>Materials and cost:</strong> For labs that have camera traps and SD cards already, the only costs are batteries for the cameras and gas for transportation. If you would like to participate but do not have camera traps, you can purchase your own camera trap equipment. Camera traps sufficient for this project run about $100-150/each. SD cards are about $5 each, and you can get a pack of batteries to run up to 30 cameras for about $50. Optional equipment includes a security case and lock for each camera. We may have a limited number of camera traps that we can loan out for a four-week sampling timeframe, so if you’d like to participate but cannot purchase your own equipment, please still feel free to contact us.</h4>
 </div>
-<div id="authorship-groups-of-up-to-two-individuals-that-collect-camera-trap-and-visual-count-data-along-at-least-one-transect-will-be-offered-authorship-on-the-first-paper-published-with-the-dataset." class="section level4">
-<h4><strong>Authorship:</strong> Groups of up to two individuals that collect camera trap and visual count data along at least one transect will be offered authorship on the first paper published with the dataset.</h4>
+<div id="authorship-groups-of-up-to-two-individuals-who-collect-camera-trap-data-in-at-least-one-city-following-the-guidelines-below-will-be-offered-authorship-on-the-first-paper-published-with-the-aggregate-data-collected-see-below-for-more-details." class="section level4">
+<h4><strong>Authorship:</strong> Groups of up to two individuals who collect camera trap data in at least one city following the guidelines below will be offered authorship on the first paper published with the aggregate data collected (see below for more details).</h4>
 </div>
-<div id="timing-sampling-must-be-conducted-in-spring-or-summer-2022-and-completed-by-august-2022." class="section level4">
-<h4><strong>Timing:</strong> Sampling must be conducted in spring or summer 2022 and completed by August 2022.</h4>
+<div id="timing-sampling-must-be-conducted-prior-to-august-2022." class="section level4">
+<h4><strong>Timing:</strong> Sampling must be conducted prior to August 2022.</h4>
 </div>
-<div id="interested-click-here-to-express-interest-in-participating-the-link-will-take-you-to-a-simple-survey-asking-a-few-questions-about-where-and-when-you-would-conduct-sampling-and-whether-you-have-your-own-camera-trapping-equipment.-at-this-stage-we-are-simply-gauging-interest-in-the-project.-we-will-follow-up-to-confirm-that-your-city-would-be-a-good-fit-for-the-project-and-if-so-to-provide-more-detailed-instructions-on-sampling." class="section level4">
-<h4><strong>Interested?</strong> <a href="https://forms.gle/ocZeYAqNsVLNbsYr8">Click here to express interest in participating!</a> The link will take you to a simple survey asking a few questions about where and when you would conduct sampling and whether you have your own camera trapping equipment. At this stage we are simply gauging interest in the project. We will follow up to confirm that your city would be a good fit for the project, and if so, to provide more detailed instructions on sampling.</h4>
+<div id="which-cities-for-now-we-are-restricting-this-project-to-cities-in-the-native-range-of-eastern-gray-squirrels-focused-in-the-upper-midwest-northeastern-us-and-southeastern-canada-see-map-of-study-area-below.-click-here-to-see-a-map-of-cities-currently-enrolled-in-the-study." class="section level4">
+<h4><strong>Which cities?:</strong> For now we are restricting this project to cities in the native range of eastern gray squirrels, focused in the upper Midwest, northeastern US, and southeastern Canada (see map of study area below). <a href="https://www.google.com/maps/d/edit?mid=1hVsdgMm_khsf05v5D-eAJ6XMGHMwyIK3&amp;usp=sharing">Click here to see a map of cities currently enrolled in the study.</a></h4>
+<div class="figure" style="text-align: center">
+<img src="images/clinesStudyArea.png" alt="[A interactive version of this map can be found here.](https://squirrelmapper.org/map.html)" width="800px" />
+<p class="caption">
+<a href="https://squirrelmapper.org/map.html">A interactive version of this map can be found here.</a>
+</p>
+</div>
+</div>
+<div id="interested-click-here-to-express-interest-in-participating-the-link-will-take-you-to-a-simple-survey-asking-a-few-questions-about-where-and-when-you-would-conduct-sampling-and-whether-you-have-your-own-camera-trapping-equipment.-we-will-follow-up-to-confirm-that-your-city-would-be-a-good-fit-for-the-project." class="section level4">
+<h4><strong>Interested?</strong> <a href="https://forms.gle/ocZeYAqNsVLNbsYr8">Click here to express interest in participating!</a> The link will take you to a simple survey asking a few questions about where and when you would conduct sampling and whether you have your own camera trapping equipment. We will follow up to confirm that your city would be a good fit for the project.</h4>
 </div>
 </div>
 
@@ -508,7 +494,7 @@ $('.title').remove()
 <br>
 <br>
 <br>
-<p>Last modified August 28, 2021</p>
+<p>Last modified October 2022</p>
 </center>
 </div>
 
@@ -520,7 +506,7 @@ $('.title').remove()
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -538,7 +524,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
