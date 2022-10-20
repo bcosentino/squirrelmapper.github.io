@@ -13,6 +13,7 @@
 
 <title>SquirrelMapper</title>
 
+<script src="site_libs/header-attrs-2.17/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -29,7 +30,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -219,7 +219,8 @@
 
 
 
-<link rel="stylesheet" href="../styles.css" type="text/css" />
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 
 
@@ -243,6 +244,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -300,11 +304,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -333,8 +341,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -342,16 +350,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -395,7 +396,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -457,16 +458,38 @@ $(document).ready(function () {
 $('.title').remove()
 </script>
 <p><br></p>
-<div id="do-you-hunt-or-trap-squirrels-we-can-use-your-samples." class="section level2">
-<h2><strong>Do you hunt or trap squirrels? We can use your samples.</strong></h2>
+<div id="do-you-hunt-or-trap-squirrels-we-can-use-your-samples."
+class="section level2">
+<h2><strong>Do you hunt or trap squirrels? We can use your
+samples.</strong></h2>
 <ul>
-<li><h4 id="just-a-tiny-clip-of-ear-tissue-is-all-we-need-to-isolate-dna-and-better-understand-how-coat-color-in-squirrels-evolves.">Just a tiny clip of ear tissue is all we need to isolate DNA and better understand how coat color in squirrels evolves.</h4></li>
-<li><h4 id="we-can-use-samples-from-any-eastern-gray-squirrel-in-the-u.s.-or-canada-regardless-of-their-coat-color-gray-black-or-others.">We can use samples from ANY eastern gray squirrel in the U.S. or Canada, regardless of their coat color (gray, black, or others).</h4></li>
-<li><h4 id="squirrels-must-be-harvested-legally.-if-you-are-a-hunter-that-means-you-need-a-valid-hunting-license-and-are-following-hunting-regulations-for-squirrels-in-your-state-or-province.-we-can-also-use-samples-from-squirrels-legally-taken-by-licensed-pest-management-professionals.">Squirrels must be harvested legally. If you are a hunter, that means you need a valid hunting license and are following hunting regulations for squirrels in your state or province. We can also use samples from squirrels legally taken by licensed pest management professionals.</h4></li>
-<li><h4 id="if-youre-interested-fill-out-the-form-linked-below-and-well-send-you-simple-instructions-and-basic-materials-vials-for-samples-shipping-container-needed-to-collect-tissue-and-send-it-to-us.">If you’re interested, fill out the form linked below, and we’ll send you simple instructions and basic materials (vials for samples, shipping container) needed to collect tissue and send it to us.</h4></li>
+<li><h4
+id="just-a-tiny-clip-of-ear-tissue-is-all-we-need-to-isolate-dna-and-better-understand-how-coat-color-in-squirrels-evolves.">Just
+a tiny clip of ear tissue is all we need to isolate DNA and better
+understand how coat color in squirrels evolves.</h4></li>
+<li><h4
+id="we-can-use-samples-from-any-eastern-gray-squirrel-in-the-u.s.-or-canada-regardless-of-their-coat-color-gray-black-or-others.">We
+can use samples from ANY eastern gray squirrel in the U.S. or Canada,
+regardless of their coat color (gray, black, or others).</h4></li>
+<li><h4
+id="squirrels-must-be-harvested-legally.-if-you-are-a-hunter-that-means-you-need-a-valid-hunting-license-and-are-following-hunting-regulations-for-squirrels-in-your-state-or-province.-we-can-also-use-samples-from-squirrels-legally-taken-by-licensed-pest-management-professionals.">Squirrels
+must be harvested legally. If you are a hunter, that means you need a
+valid hunting license and are following hunting regulations for
+squirrels in your state or province. We can also use samples from
+squirrels legally taken by licensed pest management
+professionals.</h4></li>
+<li><h4
+id="if-youre-interested-fill-out-the-form-linked-below-and-well-send-you-simple-instructions-and-basic-materials-vials-for-samples-shipping-container-needed-to-collect-tissue-and-send-it-to-us.">If
+you’re interested, fill out the form linked below, and we’ll send you
+simple instructions and basic materials (vials for samples, shipping
+container) needed to collect tissue and send it to us.</h4></li>
 </ul>
-<div id="click-here-to-express-interest-in-contributing-tissue-samples-from-squirrels" class="section level3">
-<h3><strong><a href="https://forms.gle/7UTFrEH6YU7zWSr39">Click here to express interest in contributing tissue samples from squirrels</a></strong></h3>
+<div
+id="click-here-to-express-interest-in-contributing-tissue-samples-from-squirrels"
+class="section level3">
+<h3><strong><a href="https://forms.gle/7UTFrEH6YU7zWSr39">Click here to
+express interest in contributing tissue samples from
+squirrels</a></strong></h3>
 </div>
 </div>
 
